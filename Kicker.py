@@ -1,10 +1,14 @@
 import Scrape.NFLKickers as nfl
-import Tkinter.Gui as gui
+import Gui.Gui as gui
 
 def main():
+    league = gui.start()
+
+    if league == "NFL":
+        kickers = nfl.kickerList()
     
-    kickers = nfl.kickerList()
-    gui.start()
+    gui.kickerking(kickers, league)
+
 
 
 
