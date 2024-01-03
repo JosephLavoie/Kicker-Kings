@@ -23,6 +23,5 @@ def kickerList():
         name = (columns[0].a.text).replace(',', '')
 
         kickers.append(c.Kicker(name, team, athleteid, profile, "NFL"))
-
-    for i in kickers:
-        print(i)
+    
+    return kickers
