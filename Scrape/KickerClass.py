@@ -8,6 +8,16 @@ class Kicker:
 
         self.abr = self.getAbr()
 
+        self.field_goal_percent = None
+        self.field_goal_percent_season = None
+        self.field_goal_attempt_average_season = None
+        self.field_goal_made_average_season = None
+        self.field_goal_attempt_last_game = None
+        self.field_goal_made_last_game = None
+
+        self.prediction0 = None
+        self.prediction1 = None
+
     def __str__(self):
         return f"{self.abr}: {self.name}"
     

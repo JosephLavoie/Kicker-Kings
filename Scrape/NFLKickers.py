@@ -20,8 +20,16 @@ def kickerList():
         profile = columns[0].a["href"]
         athleteid = profile[37:].split('/')[0]
         team = columns[1].a.text
+        
         name = (columns[0].a.text).replace(',', '')
+        name_list = name.split()
+        name_list.reverse()
+        name = " ".join(name_list)
 
         kickers.append(c.Kicker(name, team, athleteid, profile, "NFL"))
     
     return kickers
+
+def KickerInfo(kicker:c.Kicker):
+    
+    return kicker
