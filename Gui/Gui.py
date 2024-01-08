@@ -1,5 +1,6 @@
 import tkinter as tk
 from Kicker import SelectedKicker
+import Scrape.KickerClass as c
 
 def start():
     league = ""
@@ -42,11 +43,15 @@ def kickerking(kickers:list, league:str):
 
             player_label.config(text=str(kicker))
             
-            kickers[selected_item_index] = SelectedKicker(kicker)
-
+            if (kickers[selected_item_index]).field_goal_percent_career == None: 
+                kickers[selected_item_index] = SelectedKicker(kicker, league)
+    
             DisplayStats(kickers[selected_item_index])
 
     def DisplayStats(kicker):
+        print("Display Stats")
+        info.config(text="We are displaying!!!!!")
+
         return None  
 
         
@@ -64,5 +69,8 @@ def kickerking(kickers:list, league:str):
     player_label.pack()
     
     kicker_listbox.bind("<<ListboxSelect>>", on_select)
+
+    info = tk.Label(window, text="Not Displaying", font = "30")
+    info.pack()
 
     window.mainloop()

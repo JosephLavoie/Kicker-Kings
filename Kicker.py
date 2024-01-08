@@ -2,8 +2,8 @@ import Scrape.NFLKickers as nfl
 import Scrape.KickerClass as c
 import Gui.Gui as gui
 
+
 def main():
-    global league
     league = gui.start()
 
     if league == "NFL":
@@ -17,8 +17,9 @@ def main():
     #for kicker in nfl_kickers:
      #   print(kicker.first + " " + kicker.last)
 
-def SelectedKicker(kicker:c.Kicker):
+def SelectedKicker(kicker:c.Kicker, league):
     if league == "NFL":
+        print("SelectedKicker: if")
         return nfl.KickerInfo(kicker)
 
 if __name__ == "__main__":

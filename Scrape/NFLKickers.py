@@ -45,13 +45,22 @@ def KickerInfo(kicker:c.Kicker):
 
 
     # Extract the values
-    field_goal_percent_season = float(data["statistics"]["splits"][0]["stats"][0])
-    field_goal_season = (data["statistics"]["splits"][0]["stats"][1]).split('-')
+    for split in data["statistics"]["splits"]:
+        if split["displayName"] == "Career":
+            field_goal_percent_career = float(split["stats"][0])
+            field_goal_career = (split["stats"][1]).split('-')
+        elif split["displayName"] == "Regular Season":
+            field_goal_percent_season = float(split["stats"][0])
+            field_goal_season = (split["stats"][1]).split('-')
+        
+
+    #field_goal_percent_season = float(data["statistics"]["splits"][0]["stats"][0])
+    #field_goal_season = (data["statistics"]["splits"][0]["stats"][1]).split('-')
     field_goal_made_season = int(field_goal_season[0])
     field_goal_attempt_season = int(field_goal_season[1])
 
-    field_goal_percent_career = float(data["statistics"]["splits"][3]["stats"][0])
-    field_goal_career = (data["statistics"]["splits"][3]["stats"][1]).split('-')
+    #field_goal_percent_career = float(data["statistics"]["splits"][3]["stats"][0])
+    #field_goal_career = (data["statistics"]["splits"][3]["stats"][1]).split('-')
     field_goal_made_career = int(field_goal_career[0])
     field_goal_attempt_career = int(field_goal_career[1])
 
@@ -74,15 +83,36 @@ def KickerInfo(kicker:c.Kicker):
     table = soup.find('table', class_='Table Table--align-right')
     rows = table.find('tbody', class_='Table__TBODY').find_all('tr')
 
-    games_season = int(rows[-1].find_all('td')[0].text)
-    games_career = int(rows[-2].find_all('td')[0].text)
-
+    games_career = int(rows[-1].find_all('td')[0].text)
+    games_season = int(rows[-2].find_all('td')[0].text)
 
 
     kicker.field_goal_percent_season = field_goal_percent_season
     kicker.field_goal_percent_career = field_goal_percent_career
     kicker.field_goal_made_last_game = field_goal_made_last_game
     kicker.field_goal_attempt_last_game = field_goal_attempt_last_game
+    kicker.field_goal_made_average_season = field_goal_made_season / games_season
+    kicker.field_goal_made_average_career = field_goal_made_career / games_career
+    kicker.field_goal_attempt_average_season = field_goal_attempt_season / games_season
+    kicker.field_goal_attempt_average_career = field_goal_attempt_career / games_career
+
+    print("v-v-v--------Removable-------v-v-v")
+
+    print("field_goal_season:",field_goal_season)
+    print("field_goal_career:",field_goal_career)
+    print("games_season", games_season)
+    print("games_career", games_career)
+
+    print(kicker.field_goal_percent_season)
+    print(kicker.field_goal_percent_career)
+    print(kicker.field_goal_made_last_game) #does not work
+    print(kicker.field_goal_attempt_last_game) #does not work
+    print(kicker.field_goal_made_average_season) #doesnt work all the time (YOUNGHOE KOO)
+    print(kicker.field_goal_made_average_career)
+    print(kicker.field_goal_attempt_average_season) #doesnt work all the time (YOUNGHOE KOO)
+    print(kicker.field_goal_attempt_average_career)
+
+    print("-------------Removable-------------")
 
 
     return kicker
