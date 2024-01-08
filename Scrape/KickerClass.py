@@ -8,12 +8,14 @@ class Kicker:
 
         self.abr = self.getAbr()
 
-        self.field_goal_percent = None
+        self.field_goal_percent_career = None
         self.field_goal_percent_season = None
-        self.field_goal_attempt_average_season = None
-        self.field_goal_made_average_season = None
-        self.field_goal_attempt_last_game = None
-        self.field_goal_made_last_game = None
+        self.field_goal_attempt_average_career = None #attempts/games
+        self.field_goal_attempt_average_season = None #attempts this season/games this season
+        self.field_goal_made_average_career = None #goods/games
+        self.field_goal_made_average_season = None #goods this season/games this season
+        self.field_goal_attempt_last_game = None #attempts last game
+        self.field_goal_made_last_game = None #goods last game
 
         self.prediction0 = None
         self.prediction1 = None

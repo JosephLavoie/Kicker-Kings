@@ -19,7 +19,7 @@ def main():
 
 def SelectedKicker(kicker:c.Kicker):
     if league == "NFL":
-        return nfl.KickerInfo()
+        return nfl.KickerInfo(kicker)
 
 if __name__ == "__main__":
     main()

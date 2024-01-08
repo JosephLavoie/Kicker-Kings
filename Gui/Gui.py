@@ -44,9 +44,10 @@ def kickerking(kickers:list, league:str):
             
             kickers[selected_item_index] = SelectedKicker(kicker)
 
-            Stats(kickers[selected_item_index])
+            DisplayStats(kickers[selected_item_index])
 
-    def Stats(kicker):
+    def DisplayStats(kicker):
+        return None  
 
         
 
