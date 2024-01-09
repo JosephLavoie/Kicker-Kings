@@ -58,19 +58,26 @@ def kickerking(kickers:list, league:str):
 
     window = tk.Tk(className="Kicker King - " + league)
     window.geometry("1200x675")
+
+    window.grid_columnconfigure(0, weight=1)
+    window.grid_columnconfigure(1, weight=3)
+    window.grid_columnconfigure(2, weight=3)
+    window.grid_columnconfigure(3, weight=3)
+    window.grid_rowconfigure(0, weight=1)
+    window.grid_rowconfigure(1, weight=1)
     
     kicker_listbox = tk.Listbox(window, selectmode=tk.SINGLE)
-    kicker_listbox.pack(side=tk.LEFT, fill=tk.BOTH) 
+    kicker_listbox.grid(row=0, column=0, rowspan=2, sticky="nesw")
 
     for kicker in kickers:
         kicker_listbox.insert(tk.END, kicker) 
     
-    player_label = tk.Label(window, text="Selected: None", font = "30")
-    player_label.pack()
+    player_label = tk.Label(window, text="Selected: None", font=("Verdana", 20))
+    player_label.grid(row=0, column=2, sticky="n") 
     
     kicker_listbox.bind("<<ListboxSelect>>", on_select)
 
-    info = tk.Label(window, text="Not Displaying", font = "30")
-    info.pack()
+    info = tk.Label(window, text="Not Displaying", font =("Verdana", 12))
+    info.grid(row=0, column=3) 
 
     window.mainloop()
