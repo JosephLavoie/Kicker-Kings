@@ -35,22 +35,51 @@ def start():
 
 def kickerking(kickers:list, league:str):
 
+    after_decimal = 2
+
+    def StatsFormat(kicker):
+        formatted_stats = []
+
+        format_decimal = f"%0.{str(after_decimal)}f"
+
+        statistics = [kicker.field_goal_percent_career,
+                    kicker.field_goal_percent_season,
+                    kicker.field_goal_attempt_average_career,
+                    kicker.field_goal_attempt_average_season,
+                    kicker.field_goal_made_average_career,
+                    kicker.field_goal_made_average_season
+                    ]
+
+        for stat in statistics:
+            formatted_stats.append(str(format_decimal % stat))
+        
+        formatted_stats.append(kicker.field_goal_attempt_last_game)
+        formatted_stats.append(kicker.field_goal_made_last_game)
+
+        return formatted_stats
+            
+
+
     def on_select(event):
         selected_index = kicker_listbox.curselection()
         if selected_index:
             selected_item_index = selected_index[0]
-            kicker = kickers[selected_item_index]
 
-            player_label.config(text=str(kicker))
+            player_label.config(text=str(kickers[selected_item_index]))
             
             if (kickers[selected_item_index]).field_goal_percent_career == None: 
-                kickers[selected_item_index] = SelectedKicker(kicker, league)
-    
+                kickers[selected_item_index] = SelectedKicker(kickers[selected_item_index], league)
+            
             DisplayStats(kickers[selected_item_index])
 
     def DisplayStats(kicker):
         print("Display Stats")
-        info.config(text="We are displaying!!!!!")
+
+        stats = StatsFormat(kicker)
+
+        fg_percent.config(text=f"\n\nCareer:{stats[0]}%\nSeason:{stats[1]}%")
+        fg_avg_attempted.config(text=f"\n\n\n\n\n\nCareer:{stats[2]}\nSeason:{stats[3]}\nLast Game:{stats[6]}")
+        fg_avg_made.config(text=f"\n\n\n\n\n\n\n\n\n\n\n\nCareer:{stats[4]}\nSeason:{stats[5]}\nLast Game:{stats[7]}")
 
         return None  
 
@@ -77,7 +106,19 @@ def kickerking(kickers:list, league:str):
     
     kicker_listbox.bind("<<ListboxSelect>>", on_select)
 
-    info = tk.Label(window, text="Not Displaying", font =("Verdana", 12))
-    info.grid(row=0, column=3) 
+    fg_avg_made = tk.Label(window, text="\n\n\n\n\n\n\n\n\n\n\n\nCareer:\nSeason:\nLast Game:", font =("Verdana", 12))
+    fg_avg_made_label = tk.Label(window, text="\n\n\n\n\n\n\nAvg FGs Made:", font =("Verdana", 15))
+    fg_avg_attempted = tk.Label(window, text="\n\n\n\n\n\nCareer:\nSeason:\nLast Game:", font =("Verdana", 12))
+    fg_avg_attempted_label = tk.Label(window, text="\n\n\nAvg FGs Attempted:", font =("Verdana", 15))
+    fg_percent = tk.Label(window, text="\n\nCareer:%\nSeason:%", font =("Verdana", 12))
+    fg_percent_label = tk.Label(window, text="Field Goal %:", font =("Verdana", 15))
+
+    fg_avg_made.grid(row=0, column=3, sticky="ne")
+    fg_avg_made_label.grid(row=0, column=3, sticky="ne")
+    fg_avg_attempted.grid(row=0, column=3, sticky="ne")
+    fg_avg_attempted_label.grid(row=0, column=3, sticky="ne")
+    fg_percent.grid(row=0, column=3, sticky="ne")
+    fg_percent_label.grid(row=0, column=3, sticky="ne")
+
 
     window.mainloop()
