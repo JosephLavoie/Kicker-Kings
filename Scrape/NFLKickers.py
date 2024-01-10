@@ -71,8 +71,8 @@ def KickerInfo(kicker:c.Kicker):
     soup = BeautifulSoup(data.text, 'html.parser')
     target_row = soup.find('tr', {'class': 'Table__TR Table__TR--sm Table__even', 'data-idx': '0'})
     field_goal_last_game = (target_row.find_all('td')[10].text.strip()).split('-')
-    field_goal_made_last_game = field_goal_last_game[0]
-    field_goal_attempt_last_game = field_goal_last_game[1]
+    field_goal_made_last_game = int(field_goal_last_game[0])
+    field_goal_attempt_last_game = int(field_goal_last_game[1])
 
     url = "https://www.espn.com/nfl/player/stats/_/id/" + kicker.athleteid
 
