@@ -1,13 +1,21 @@
-import Scrape.NFLKickers as nfl
-import Scrape.KickerClass as c
+import Scrape.NFLKickers as scrape
+import Local.NFLKickers as local
+import Classes.KickerClass as c
 import Gui.Gui as gui
 
 
 def main():
-    league = gui.start()
+
+    from_file = gui.door()
+
+    league = gui.antichambre()
 
     if league == "NFL":
-        kickers = nfl.kickerList()
+        if from_file is True:
+            kickers = local.kickerList()
+        else:
+            kickers = scrape.kickerList()
+
     
     gui.kickerking(kickers, league)
 
@@ -20,7 +28,7 @@ def main():
 def SelectedKicker(kicker:c.Kicker, league):
     if league == "NFL":
         print("SelectedKicker: if")
-        return nfl.KickerInfo(kicker)
+        return scrape.KickerInfo(kicker)
 
 if __name__ == "__main__":
     main()

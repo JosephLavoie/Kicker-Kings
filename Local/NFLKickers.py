@@ -1,5 +1,6 @@
 import Classes.KickerClass as c
 import requests
+import json
 from bs4 import BeautifulSoup
 
 def UrlToResponce(url:str):

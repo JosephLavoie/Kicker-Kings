@@ -3,9 +3,39 @@ from tkinter import ttk
 from tkinter.messagebox import showinfo
 
 from Kicker import SelectedKicker
-import Scrape.KickerClass as c
+import Classes.KickerClass as c
 
-def start():
+def door():
+    from_file = None
+
+    def set_flow(from_local:bool):
+        nonlocal from_file
+        from_file = from_local
+        window.destroy()
+
+    window = tk.Tk(className="Kicker King - Startup")
+    window.geometry("800x450")
+
+    window.grid_columnconfigure(0, weight=1)
+    window.grid_columnconfigure(1, weight=1)
+    window.grid_columnconfigure(2, weight=1)
+    window.grid_rowconfigure(0, weight=1)
+    window.grid_rowconfigure(1, weight=1)
+
+    title = tk.Label(window, text="Select an option", font=("Verdana", 20))
+    title.grid(row=0, column=1)
+
+    nfl_button = tk.Button(window, text="From Network", command=lambda: set_flow(False), height=5, width=15, font=("Verdana", 15))
+    nfl_button.grid(row=1, column=0, sticky="n")
+
+    cfb_button = tk.Button(window, text="From Save", command=lambda: set_flow(True), height=5, width=15, font=("Verdana", 15))
+    cfb_button.grid(row=1, column=2, sticky="n")
+
+    window.mainloop()
+
+    return from_file
+
+def antichambre():
     league = ""
 
     def set_league(league_name):
