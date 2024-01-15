@@ -73,7 +73,7 @@ def kickerking(kickers:list, league:str, from_file:bool):
 
     def StatsFormat(kicker):
         formatted_stats = []
-        
+
         format_decimal = f"%0.{str(after_decimal)}f"
 
         statistics = [kicker.field_goal_percent_career,
@@ -125,8 +125,20 @@ def kickerking(kickers:list, league:str, from_file:bool):
         return None
     
     def SaveData():
-        save.SaveKickerInfo(kickers)
-        save_button.config(text="Saved!")
+        save_kickers = save.SaveKickerInfo(kickers)
+
+        save_window = tk.Tk(className="Saved Kickers")
+        save_window.geometry("400x400")
+
+        saved_listbox = tk.Listbox(save_window)
+        saved_listbox.pack(expand=True, fill='both')
+
+        for kicker in save_kickers:
+            saved_listbox.insert(tk.END, kicker)
+
+        save_window.mainloop()
+
+
 
     window = tk.Tk(className="Kicker King - " + league)
     window.geometry("1200x675")
