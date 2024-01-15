@@ -103,11 +103,6 @@ def KickerInfo(kicker:c.Kicker):
 
     print("v-v-v--------Removable-------v-v-v")
 
-    print("field_goal_season:",field_goal_season)
-    print("field_goal_career:",field_goal_career)
-    print("games_season", games_season)
-    print("games_career", games_career)
-
     print(kicker.field_goal_percent_season)
     print(kicker.field_goal_percent_career)
     print(kicker.field_goal_made_last_game)

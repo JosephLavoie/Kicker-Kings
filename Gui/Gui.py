@@ -4,6 +4,7 @@ from tkinter.messagebox import showinfo
 
 from Kicker import SelectedKicker
 import Classes.KickerClass as c
+import Save.NFLKickers as save
 
 def door():
     from_file = None
@@ -66,13 +67,13 @@ def antichambre():
     return league
 
 
-def kickerking(kickers:list, league:str):
+def kickerking(kickers:list, league:str, from_file:bool):
 
     after_decimal = 2
 
     def StatsFormat(kicker):
         formatted_stats = []
-
+        
         format_decimal = f"%0.{str(after_decimal)}f"
 
         statistics = [kicker.field_goal_percent_career,
@@ -100,8 +101,8 @@ def kickerking(kickers:list, league:str):
 
             player_label.config(text=str(kickers[selected_item_index]))
             
-            if (kickers[selected_item_index]).field_goal_percent_career == None: 
-                kickers[selected_item_index] = SelectedKicker(kickers[selected_item_index], league)
+            if (kickers[selected_item_index]).field_goal_percent_career == None:
+                kickers[selected_item_index] = SelectedKicker(kickers[selected_item_index], league, from_file)
             
             DisplayStats(kickers[selected_item_index])
 
@@ -123,6 +124,9 @@ def kickerking(kickers:list, league:str):
 
         return None
     
+    def SaveData():
+        save.SaveKickerInfo(kickers)
+        save_button.config(text="Saved!")
 
     window = tk.Tk(className="Kicker King - " + league)
     window.geometry("1200x675")
@@ -193,6 +197,10 @@ def kickerking(kickers:list, league:str):
     fg_percent.grid(row=0, column=3, sticky="ne")
 
 
+    save_button = tk.Button(window, text="Save", command=SaveData)
+    save_button.grid(row=0, column=1, sticky="n", pady=10)
+
+
     u_projection_label = tk.Label(window, text="Your Projection:", font=("Verdana", 15))
     u_projection_label.grid(row=2, column=3, sticky="n")
 
@@ -202,6 +210,7 @@ def kickerking(kickers:list, league:str):
 
     projection_button = tk.Button(window, text="Projection Check", command=projection_check)
     projection_button.grid(row=2, column=3, sticky="s", pady=10)
+    
 
 
     window.mainloop()

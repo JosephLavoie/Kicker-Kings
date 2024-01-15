@@ -11,13 +11,13 @@ def main():
     league = gui.antichambre()
 
     if league == "NFL":
-        if from_file is True:
+        if from_file:
             kickers = local.kickerList()
         else:
             kickers = scrape.kickerList()
 
     
-    gui.kickerking(kickers, league)
+    gui.kickerking(kickers, league, from_file)
 
 
 
@@ -25,10 +25,13 @@ def main():
     #for kicker in nfl_kickers:
      #   print(kicker.first + " " + kicker.last)
 
-def SelectedKicker(kicker:c.Kicker, league):
+def SelectedKicker(kicker:c.Kicker, league, from_file):
+
     if league == "NFL":
-        print("SelectedKicker: if")
-        return scrape.KickerInfo(kicker)
+        if from_file:
+            return local.KickerInfo(kicker)
+        else:
+            return scrape.KickerInfo(kicker)
 
 if __name__ == "__main__":
     main()
